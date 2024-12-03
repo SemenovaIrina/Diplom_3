@@ -1,0 +1,13 @@
+edu\practicum\page_objects\pom\AfterLoginPage.class
+edu\practicum\page_objects\pom\PersonalAccountPage.class
+edu\practicum\page_objects\models\UserAfterCreate.class
+edu\practicum\page_objects\data_utils\UserAPIClient.class
+edu\practicum\page_objects\models\User.class
+edu\practicum\page_objects\pom\HomePage.class
+edu\practicum\page_objects\pom\AuthorizationPage.class
+edu\practicum\page_objects\models\UserInAnswer.class
+edu\practicum\page_objects\models\User$Builder.class
+edu\practicum\page_objects\driver\WebDriverCreator.class
+edu\practicum\page_objects\pom\RegistrationPage.class
+edu\practicum\page_objects\pom\PasswordRecoveryPage.class
+edu\practicum\page_objects\data_utils\UtilsForDataPrepare.class
