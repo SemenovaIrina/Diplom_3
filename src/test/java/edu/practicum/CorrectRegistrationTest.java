@@ -1,79 +1,46 @@
 package edu.practicum;
 
-import edu.practicum.page_objects.AuthorizationPage;
-import edu.practicum.page_objects.HomePage;
-import edu.practicum.page_objects.RegistrationPage;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-import static edu.practicum.page_objects.data.UtilsForDataPrepare.emailRandom;
-import static edu.practicum.page_objects.data.UtilsForDataPrepare.stringRandomGenerate;
+import java.util.Random;
 
-@RunWith(Parameterized.class)
-public class RegistrationTest extends PrepareUtils {
-    private final String name;
-    private final String email;
-    private final String password;
+import static edu.practicum.data_utils.UtilsForDataPrepare.emailRandom;
+import static edu.practicum.data_utils.UtilsForDataPrepare.stringRandomGenerate;
 
-    public RegistrationTest(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    // Тестовые данные
-    @Parameterized.Parameters
-    public static Object[][] getUserData() {
-        return new Object[][]{
-                {stringRandomGenerate(10), emailRandom(10), stringRandomGenerate(10)}
-        };
-    }
+public class CorrectRegistrationTest extends PrepareUtilsAndSteps {
 
     @Test
-    public void  registrationByClickOnLoginButton() {
-        HomePage page = new HomePage(driver);
-        //ждем когда прогрузится страница
-        page.waitForLoadPage();
+    public void registrationByClickOnLoginButton() {
+        //так как предполагается потоковый запуск тестов, то у каждого теста должны быть свои данный для user
+        //генерируем данные пользователя для регистрации
+        Random rnd = new Random();
+        String name = stringRandomGenerate(rnd.nextInt(254) + 1);
+        String email = emailRandom(rnd.nextInt(254) + 1);
+        String password = stringRandomGenerate(rnd.nextInt(248) + 7);
         //клик по кнопке Войти в аккаунт
-        page.clickAccountLoginButton();
+        homePage.clickAccountLoginButton();
         //все действия, которые должны произойти после
-        RegistrationSteps();
-    }
-
-    @Test
-    public void  registrationByClickOnPersonalAccount() {
-        HomePage page = new HomePage(driver);
-        //ждем когда прогрузится страница
-        page.waitForLoadPage();
-        //клик по кнопке Личный кабинет вверху страницы
-        page.clickPersonalAccountButton();
-        //все действия, которые должны произойти после
-        RegistrationSteps();
-    }
-
-    public void RegistrationSteps() {
-        //попадаем на страницу для входа в аккаунт
-        AuthorizationPage authPage = new AuthorizationPage(driver);
-        //ждем пока загрузится страница
-        authPage.waitForLoadPage();
-        //нажимаем на ссылку Зарегистрироваться
-        authPage.clickRegistrationRef();
-        //попадаем на страницу регистрации
-        RegistrationPage reistrationPage = new RegistrationPage(driver);
-        //ждем пока загрузится страница
-        reistrationPage.waitForLoadPage();
-        //заполяем поля формы
-        reistrationPage.setName(name);
-        reistrationPage.setEmail(email);
-        reistrationPage.setPassword(password);
-        //нажимаем кнопку Зарегистрироваться
-        reistrationPage.clickRegistrationButton();
-        //ждем пока загрузится страница
+        RegistrationSteps(name, email, password);
+        //ждем пока загрузится страница Авторизации
         authPage.waitForLoadPage();
         Assert.assertTrue("Перехода на форму для входа в аккаунт не происходит", authPage.checkIsVisibleLoginFrame());
+    }
 
-
+    @Test
+    public void registrationByClickOnPersonalAccount() {
+        //так как предполагается потоковый запуск тестов, то у каждого теста должны быть свои данный для user
+        //генерируем данные пользователя для регистрации
+        Random rnd = new Random();
+        String name = stringRandomGenerate(rnd.nextInt(254) + 1);
+        String email = emailRandom(rnd.nextInt(254) + 1);
+        String password = stringRandomGenerate(rnd.nextInt(248) + 7);
+        //клик по кнопке Личный кабинет вверху страницы
+        homePage.clickPersonalAccountButton();
+        //все действия, которые должны произойти после
+        RegistrationSteps(name, email, password);
+        //ждем пока загрузится страница Авторизации
+        authPage.waitForLoadPage();
+        Assert.assertTrue("Перехода на форму для входа в аккаунт не происходит", authPage.checkIsVisibleLoginFrame());
     }
 }

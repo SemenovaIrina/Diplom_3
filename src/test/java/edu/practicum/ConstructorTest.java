@@ -3,7 +3,7 @@ package edu.practicum;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Constructor extends PrepareUtilsAndSteps {
+public class ConstructorTest extends PrepareUtilsAndSteps {
 
     @Test
     public void sauceSelectionInConstructorIsCorrect() {
