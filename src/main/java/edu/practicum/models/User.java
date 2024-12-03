@@ -1,4 +1,4 @@
-package edu.practicum.page_objects.models;
+package edu.practicum.models;
 
 public class User {
     private String email;

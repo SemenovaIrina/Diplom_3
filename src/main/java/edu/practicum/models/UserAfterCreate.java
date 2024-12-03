@@ -1,4 +1,4 @@
-package edu.practicum.page_objects.models;
+package edu.practicum.models;
 
 public class UserAfterCreate {
     private boolean success;
