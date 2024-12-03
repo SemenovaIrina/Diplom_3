@@ -1,4 +1,4 @@
-package edu.practicum.page_objects.pom;
+package edu.practicum.pom;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
