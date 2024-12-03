@@ -1,4 +1,4 @@
-package edu.practicum.page_objects.driver;
+package edu.practicum.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
