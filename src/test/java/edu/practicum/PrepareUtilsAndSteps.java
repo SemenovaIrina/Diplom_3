@@ -16,7 +16,7 @@ public class PrepareUtilsAndSteps {
 
     WebDriver driver;
     AuthorizationPage authPage;
-    RegistrationPage reistrationPage;
+    RegistrationPage registrationPage;
     AfterLoginPage afterLoginPage;
     HomePage homePage;
     PasswordRecoveryPage passwordRecoveryPage;
@@ -28,7 +28,7 @@ public class PrepareUtilsAndSteps {
         driver = createWebDriver();
         driver.get(URL);
         authPage = new AuthorizationPage(driver);
-        reistrationPage = new RegistrationPage(driver);
+        registrationPage = new RegistrationPage(driver);
         afterLoginPage = new AfterLoginPage(driver);
         passwordRecoveryPage = new PasswordRecoveryPage(driver);
         personalAccountPage = new PersonalAccountPage(driver);
@@ -45,7 +45,7 @@ public class PrepareUtilsAndSteps {
 
     @Step
     @Description("Steps that you always need to follow when registering")
-    public void RegistrationSteps(String name, String email, String password) {
+    public void registrationSteps(String name, String email, String password) {
         //попадаем на страницу для входа в аккаунт
         //ждем пока загрузится страница
         authPage.waitForLoadPage();
@@ -53,18 +53,18 @@ public class PrepareUtilsAndSteps {
         authPage.clickRegistrationRef();
         //попадаем на страницу регистрации
         //ждем пока загрузится страница
-        reistrationPage.waitForLoadPage();
+        registrationPage.waitForLoadPage();
         //заполяем поля формы
-        reistrationPage.setName(name);
-        reistrationPage.setEmail(email);
-        reistrationPage.setPassword(password);
+        registrationPage.setName(name);
+        registrationPage.setEmail(email);
+        registrationPage.setPassword(password);
         //нажимаем кнопку Зарегистрироваться
-        reistrationPage.clickRegistrationButton();
+        registrationPage.clickRegistrationButton();
     }
 
     @Step
     @Description("Steps that you always need to follow when login")
-    public void LoginSteps(String email, String password) {
+    public void loginSteps(String email, String password) {
         //попадаем на страницу для входа в аккаунт
         //ждем пока загрузится страница
         authPage.waitForLoadPage();
@@ -82,7 +82,7 @@ public class PrepareUtilsAndSteps {
         //клик по кнопке Личный кабинет
         homePage.clickPersonalAccountButton();
         //все действия, которые должны произойти после
-        LoginSteps(user.getEmail(), user.getPassword());
+        loginSteps(user.getEmail(), user.getPassword());
         //ждем пока загрузится страница
         afterLoginPage.waitForLoadPage();
         Assert.assertTrue("Логина не происходит", afterLoginPage.checkIsVisibleMakeOrderButton());

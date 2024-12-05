@@ -1,8 +1,9 @@
 package edu.practicum;
 
-import edu.practicum.data_utils.UserAPIClient;
+import edu.practicum.utils.UserAPIClient;
 import edu.practicum.models.User;
 import edu.practicum.models.UserAfterCreate;
+import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +12,9 @@ import org.junit.runners.Parameterized;
 
 import java.util.Random;
 
-import static edu.practicum.data_utils.UserAPIClient.checksCorrectCreateAndLoginUser;
-import static edu.practicum.data_utils.UtilsForDataPrepare.emailRandom;
-import static edu.practicum.data_utils.UtilsForDataPrepare.stringRandomGenerate;
+import static edu.practicum.utils.UserAPIClient.checksCorrectCreateAndLoginUser;
+import static edu.practicum.utils.UtilsForDataPrepare.emailRandom;
+import static edu.practicum.utils.UtilsForDataPrepare.stringRandomGenerate;
 
 @RunWith(Parameterized.class)
 public class PersonalAccountTest extends PrepareUtilsAndSteps {
@@ -40,6 +41,7 @@ public class PersonalAccountTest extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the possibility of login in personal account")
     public void comeInPersonalAccount() {
         //для того чтобы перейти в личный кабинет пользователь должен залогиниться
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
@@ -48,6 +50,7 @@ public class PersonalAccountTest extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the possibility to switch to the constructor from personal account")
     public void goToConstructorFromPersonalAccount() {
         //пользователь должен залогиниться
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
@@ -59,6 +62,7 @@ public class PersonalAccountTest extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the possibility to switch to the constructor from personal account by click on logo")
     public void goToConstructorFromPersonalAccountByLogo() {
         //пользователь должен залогиниться
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
@@ -70,6 +74,7 @@ public class PersonalAccountTest extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the possibility of logout from personal account")
     public void logoutFromPersonalAccount() {
         //пользователь должен залогиниться
         userAfterCreate = checksCorrectCreateAndLoginUser(user);

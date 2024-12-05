@@ -1,8 +1,9 @@
 package edu.practicum;
 
-import edu.practicum.data_utils.UserAPIClient;
+import edu.practicum.utils.UserAPIClient;
 import edu.practicum.models.User;
 import edu.practicum.models.UserAfterCreate;
+import io.qameta.allure.Description;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +12,9 @@ import org.junit.runners.Parameterized;
 
 import java.util.Random;
 
-import static edu.practicum.data_utils.UserAPIClient.checksCorrectCreateAndLoginUser;
-import static edu.practicum.data_utils.UtilsForDataPrepare.emailRandom;
-import static edu.practicum.data_utils.UtilsForDataPrepare.stringRandomGenerate;
+import static edu.practicum.utils.UserAPIClient.checksCorrectCreateAndLoginUser;
+import static edu.practicum.utils.UtilsForDataPrepare.emailRandom;
+import static edu.practicum.utils.UtilsForDataPrepare.stringRandomGenerate;
 
 @RunWith(Parameterized.class)
 public class LoginTest extends PrepareUtilsAndSteps {
@@ -40,32 +41,35 @@ public class LoginTest extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the possibility of login via the Login button")
     public void loginByClickOnLoginButton() {
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
         //авторизация
         //клик по кнопке Войти в аккаунт
         homePage.clickAccountLoginButton();
         //все действия, которые должны произойти после
-        LoginSteps(user.getEmail(), user.getPassword());
+        loginSteps(user.getEmail(), user.getPassword());
         //ждем пока загрузится страница
         afterLoginPage.waitForLoadPage();
         Assert.assertTrue("Логина не происходит", afterLoginPage.checkIsVisibleMakeOrderButton());
     }
 
     @Test
+    @Description("Checking the possibility of login via the Personal account button")
     public void loginByClickOnPersonalAccountButton() {
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
         //авторизация
         //клик по кнопке Личный кабинет
         homePage.clickPersonalAccountButton();
         //все действия, которые должны произойти после
-        LoginSteps(user.getEmail(), user.getPassword());
+        loginSteps(user.getEmail(), user.getPassword());
         //ждем пока загрузится страница
         afterLoginPage.waitForLoadPage();
         Assert.assertTrue("Логина не происходит", afterLoginPage.checkIsVisibleMakeOrderButton());
     }
 
     @Test
+    @Description("Checking the possibility of login from Registration form")
     public void loginFromRegistrationForm() {
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
         //авторизация
@@ -74,15 +78,16 @@ public class LoginTest extends PrepareUtilsAndSteps {
         //клик по ссылке Зарегистрироваться
         authPage.clickRegistrationRef();
         //клик по ссылке Войти
-        reistrationPage.clickLoginRef();
+        registrationPage.clickLoginRef();
         //все действия, которые должны произойти после
-        LoginSteps(user.getEmail(), user.getPassword());
+        loginSteps(user.getEmail(), user.getPassword());
         //ждем пока загрузится страница
         afterLoginPage.waitForLoadPage();
         Assert.assertTrue("Логина не происходит", afterLoginPage.checkIsVisibleMakeOrderButton());
     }
 
     @Test
+    @Description("Checking the possibility of login from Password recovery Form")
     public void loginFromPasswordRecovery() {
         userAfterCreate = checksCorrectCreateAndLoginUser(user);
         //авторизация
@@ -93,7 +98,7 @@ public class LoginTest extends PrepareUtilsAndSteps {
         //клик по ссылке Войти
         passwordRecoveryPage.clickLoginRef();
         //все действия, которые должны произойти после
-        LoginSteps(user.getEmail(), user.getPassword());
+        loginSteps(user.getEmail(), user.getPassword());
         //ждем пока загрузится страница
         afterLoginPage.waitForLoadPage();
         Assert.assertTrue("Логина не происходит", afterLoginPage.checkIsVisibleMakeOrderButton());

@@ -1,11 +1,12 @@
 package edu.practicum;
 
+import io.qameta.allure.Description;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static edu.practicum.data_utils.UtilsForDataPrepare.emailRandom;
-import static edu.practicum.data_utils.UtilsForDataPrepare.stringRandomGenerate;
+import static edu.practicum.utils.UtilsForDataPrepare.emailRandom;
+import static edu.practicum.utils.UtilsForDataPrepare.stringRandomGenerate;
 
 @RunWith(Parameterized.class)
 public class RegistrationWithIncorrectData extends PrepareUtilsAndSteps {
@@ -29,21 +30,23 @@ public class RegistrationWithIncorrectData extends PrepareUtilsAndSteps {
     }
 
     @Test
+    @Description("Checking the impossibility registration with incorrect data by click on Login button")
     public void registrationByClickOnLoginButton() {
         //клик по кнопке Войти в аккаунт
         homePage.clickAccountLoginButton();
         //все действия, которые должны произойти после
-        RegistrationSteps(name, email, password);
-        reistrationPage.checkIsVisibleUserExistMessage();
+        registrationSteps(name, email, password);
+        registrationPage.checkIsVisibleUserExistMessage();
     }
 
     @Test
+    @Description("Checking the impossibility registration with incorrect data by click on Personal account button")
     public void registrationByClickOnPersonalAccount() {
         //клик по кнопке Личный кабинет вверху страницы
         homePage.clickPersonalAccountButton();
         //все действия, которые должны произойти после
-        RegistrationSteps(name, email, password);
-        reistrationPage.checkIsVisibleUserExistMessage();
+        registrationSteps(name, email, password);
+        registrationPage.checkIsVisibleUserExistMessage();
     }
 
 }
