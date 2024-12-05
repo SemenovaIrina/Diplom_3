@@ -1,4 +1,4 @@
-package edu.practicum.data_utils;
+package edu.practicum.utils;
 
 import edu.practicum.models.User;
 import edu.practicum.models.UserAfterCreate;
